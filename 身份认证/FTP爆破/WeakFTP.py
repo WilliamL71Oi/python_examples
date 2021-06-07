@@ -110,11 +110,6 @@ def FTPExploit(ip, usernameFile, passwordFile, threadNumber, ftpPort):
 
 if __name__ == '__main__':
 
-    print("\n#####################################")
-    print("#         => MS08067 <=             #")
-    print("#                                   #")
-    print("#          ftp experiment           #")
-    print("#####################################\n")
     parser = optparse.OptionParser('Example: python %prog -i 127.0.0.1 -u ./username -p ./password -t 20 -P 21\n')
 
     parser.add_option('-i', '--ip', dest='targetIP',
