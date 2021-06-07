@@ -100,11 +100,7 @@ def SshExploit(ip,usernameFile,passwordFile,threadNumber,sshPort):
 
 if __name__ == '__main__':
 	
-	print("\n#####################################")
-	print("#         => MS08067 <=             #")
-	print("#                                  #")
-	print("#          SSH  experiment         #")
-	print("#####################################\n")
+
 	
 	parser = optparse.OptionParser('usage: python %prog target [options] \n\n'
 									'Example: python %prog 127.0.0.1 -u ./username -p ./passwords -t 20\n')
