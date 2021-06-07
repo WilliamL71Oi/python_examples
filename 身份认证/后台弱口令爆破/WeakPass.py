@@ -81,11 +81,6 @@ def partition(ls, size):
 
 
 if __name__ == '__main__':
-    print("\n#####################################")
-    print("#         => MS08067 <=             #")
-    print("#                                   #")
-    print("#     WeakPassowrd experiment       #")
-    print("#####################################\n")
-                            
+                           
     BruteForceHttp()
 
