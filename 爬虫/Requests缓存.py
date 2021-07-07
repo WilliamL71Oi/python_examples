@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding=utf-8 -*-
+# 通过配置钩子函数可以实现：在第一次请求时，因为没有请求缓存所以执行了2秒等待延迟时；当第二次请求时则没有执行2秒延时，并输出是否存在请求缓存为True。
 
 import requests_cache
 import time
