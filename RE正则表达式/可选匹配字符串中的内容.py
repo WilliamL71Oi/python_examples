@@ -13,3 +13,5 @@ match = re.search(pattern, 'mrsoft 第一')
 print(match)
 match = re.search(pattern, 'rsoft 第一')
 print(match)
+
+# 从以上的运行结果中可以看出，"01mrsoft" "mrsoft" "mrsoft " "mrsoft 第一" 均可匹配成功，只有"rsoft 第一"没有匹配成功，因为该字符中没有一个完整的mrsoft。
