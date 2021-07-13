@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding=utf-8 -*-
-
+# 首先需要定义视频播放页面的url与请求头信息，然后使用requests.get()方法发送网络请求，接着在返回的HTML代码中，通过正则表达式匹配视频地址的数据并将视频地址拼接完整,
+# 最后再次对拼接后的视频地址发送网络请求，再通过open()函数将返回的视频二进制数据携程视频文件。
 import requests
 import re
 # 定义视频播放页面的url
