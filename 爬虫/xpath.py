@@ -1,4 +1,85 @@
 
+# 在获取HTML代码中的所有节点时，可以使用"//*"的方式
+from lxml import etree
+
+html_str = '''
+<div class="video_scroll">
+<li> <a href="javascript:" onclick="login(0)" title="Java API文档">Java API文档</a> </li>
+<li> <a href="javascript:" onclick="login(0)" title="JDK的下载">JDK的下载</a> </li>
+<li> <a href="Javascript:" onclick="login(0)" title="JDK的安装">JDK的安装</a> </li>
+<li> <a href="javascript:" onclick="login(0)" title="配置JDK">配置JDK</a> </li>
+</div>
+'''
+html = etree.HTML(html_str)
+node_all = html.xpath('//*')
+print("数据类型：", type(node_all))
+print("数据长度：", len(node_all))
+print("数据内容：", node_all)
+print("节点名称：", [i.tag for i in node_all])
+
+结果：
+数据类型： <class 'list'>
+数据长度： 11
+数据内容： [<Element html at 0x5a5dc88>, <Element body at 0x5aa52d8>, <Element div at 0x5aa52b0>, <Element li at 0x5aa5288>, <Element a at 0x5aa5260>, <Element li at 0x5aa5238>, <Element a at 0x5aa1f30>, <Element li at 0x5aa1b48>, <Element a at 0x5aa1760>, <Element li at 0x5aa1990>, <Element a at 0x5aa1738>]
+节点名称： ['html', 'body', 'div', 'li', 'a', 'li', 'a', 'li', 'a', 'li', 'a']
+
+
+
+# 如果需要获取HTML代码中所有指定名称的节点，可以在"//"的后面添加节点的名称。以获取所有"li"节点为例。
+from lxml import etree
+
+html_str = '''
+<div class="video_scroll">
+<li> <a href="javascript:" onclick="login(0)" title="Java API文档">Java API文档</a> </li>
+<li> <a href="javascript:" onclick="login(0)" title="JDK的下载">JDK的下载</a> </li>
+<li> <a href="Javascript:" onclick="login(0)" title="JDK的安装">JDK的安装</a> </li>
+<li> <a href="javascript:" onclick="login(0)" title="配置JDK">配置JDK</a> </li>
+</div>
+'''
+html = etree.HTML(html_str)
+li_all = html.xpath('//li')
+print('所有li节点',li_all)
+print('获取指定li节点：',li_all[1])
+li_txt = etree.tostring(li_all[1],encoding='utf-8')
+print('获取指定节点HTML代码：',li_txt.decode('utf-8'))
+
+结果：
+所有li节点 [<Element li at 0x5df5378>, <Element li at 0x5df5350>, <Element li at 0x5df5328>, <Element li at 0x5df5300>]
+获取指定li节点： <Element li at 0x5df5350>
+获取指定节点HTML代码： <li> <a href="javascript:" onclick="login(0)" title="JDK的下载">JDK的下载</a> </li>
+
+
+# "//"可以用来获取直接的子节点，如果需要获取子孙节点时，就可以使用"//"来实现，以获取ul节点中所有子孙节点a为例。
+# 在获取ul子孙节点时，如果使用"//ul/a"的方式获取，是无法匹配任何结果的。因为"/"用来获取直接子节点，ul的直接子节点为li，并没有a节点，所以无法匹配。
+from lxml import etree
+
+html_str = '''
+<div class="level one on">
+<ul>
+<li>
+<a href="/index/index/view/id/1.html" title="什么是java" class="on">什么是java</a>
+<a>Java</a>
+</li>
+<li> <a href="javascript:" onclick="login(0)" title="java的版本">java的版本</a> </li>
+<li>
+<a href="javascript:" onclick="login(0)" title="javaAPT文档">
+<a>a节点中的节点</a>
+</a>
+</li>
+</ul>
+</div>
+'''
+html = etree.HTML(html_str)
+a_all = html.xpath('//ul//a')
+print('所有子节点a', a_all)
+print('获取指定a节点：',a_all[4])
+a_txt = etree.tostring(a_all[4],encoding='utf-8')
+print('获取指定节点HTML代码：',a_txt.decode('utf-8'))
+
+结果：
+所有子节点a [<Element a at 0x4f95300>, <Element a at 0x4f952d8>, <Element a at 0x4f952b0>, <Element a at 0x4f95288>, <Element a at 0x4f95260>]
+获取指定a节点： <Element a at 0x4f95260>
+获取指定节点HTML代码： <a>a节点中的节点</a>
 
 
 
