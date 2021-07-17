@@ -62,3 +62,18 @@ div_all = html.xpath('//div[@class="level" and @id="one"]/text()')
 print(div_all)
 
 
+
+# "@"不仅可以实现通过属性匹配节点，还可以直接获取属性所对应的值。
+
+from lxml import etree
+
+html_str = '''
+<div class="video_scroll">
+<li class="level" id="one">什么是java</li>
+</div>
+'''
+html = etree.HTML(html_str)
+li_class = html.xpath('//div/li/@class')
+li_id = html.xpath('//div/li/@id')
+print('class属性值：', li_class)
+print('id属性值：', li_id)
