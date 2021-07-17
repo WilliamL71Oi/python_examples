@@ -83,6 +83,34 @@ print('获取指定节点HTML代码：',a_txt.decode('utf-8'))
 
 
 
+# 在获取一个节点的父节点时，可以使用".."来实现，以获取所有a节点的父节点为例。
+# 除了使用".."获取第一个节点的父节点以外，还可以使用"/parent::*"的方式来获取。
+
+from lxml import etree
+html_str = '''
+<div class="video_scroll">
+<li> <a href="javascript:" onclick="login(0)" title="Java API文档">Java API文档</a> </li>
+<li> <a href="javascript:" onclick="login(0)" title="JDK的下载">JDK的下载</a> </li>
+<li> <a href="Javascript:" onclick="login(0)" title="JDK的安装">JDK的安装</a> </li>
+<li> <a href="javascript:" onclick="login(0)" title="配置JDK">配置JDK</a> </li>
+</div>
+'''
+html = etree.HTML(html_str)
+a_all_parent = html.xpath('//a/..')
+print('所有a的父节点', a_all_parent)
+print('获取指定a的父节点：',a_all_parent[0])
+a_txt = etree.tostring(a_all_parent[0], encoding='utf-8')
+print('获取指定节点HTML代码：\n',a_txt.decode('utf-8'))
+
+结果：
+所有a的父节点 [<Element li at 0x4f45378>, <Element li at 0x4f45350>, <Element li at 0x4f45328>, <Element li at 0x4f45300>]
+获取指定a的父节点： <Element li at 0x4f45378>
+获取指定节点HTML代码：
+ <li> <a href="javascript:" onclick="login(0)" title="Java API文档">Java API文档</a> </li>
+  
+ 
+
+
 # 如果同时匹配了多个节点，但只需要其中的某一节点时，可以使用指定索引的方式获取对应的节点内容，不过xpath中的索引是从1开始的。
 from lxml import etree
 
