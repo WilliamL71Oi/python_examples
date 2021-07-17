@@ -14,10 +14,13 @@ html_str = '''
 </div>
 '''
 html = etree.HTML(html_str)
+# 获取所有li/a节点中title属性值
 li_all = html.xpath('//div/li/a/@title')
 print("所有属性值: ", li_all)
+# 获取第一个li/a节点中title属性值
 li_first = html.xpath('//div/li[1]/a/@title')
 print("第一个属性值: ", li_first)
+# 获取第四个li/a节点中title属性值
 li_four = html.xpath('//div/li[4]/a/@title')
 print('第四个属性值：', li_four)
 
@@ -39,12 +42,16 @@ html_str = '''
 </div>
 '''
 html = etree.HTML(html_str)
+# 获取最后一个li/a节点中title属性值
 li_last = html.xpath('//div/li[last()]/a/@title')
 print('最后一个属性值：', li_last)
+# 获取第一个li/a节点中title属性值
 li = html.xpath('//div/li[position()=1]/a/@title')
 print('第一个位置的属性值：', li)
+# 获取倒数第二个li/a节点中title属性值
 li = html.xpath('//div/li[last()-1]/a/@title')
 print('倒数第二个位置的属性值：', li)
+# 获取位置大于1的li/a节点中title属性值
 li = html.xpath('//div/li[position()>1]/a/@title')
 print('位置大于1的属性值：', li)
 
