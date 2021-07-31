@@ -82,3 +82,35 @@ if __name__ == '__main__':
     t1.join()       # 等待t1线程结束
     t2.join()       # 等待t2线程结束
     print('---主线程结束---')
+    
+    
+    
+# 使用多线程的互斥锁模拟多人购票功能
+# 这里使用多线程和互斥锁模拟实现多人同时订购电影票的功能，假设电影院某个场次只有100张电影票，10个用户同事抢购该电影票，每出售一张，显示一次剩余的电影票张数。
+# 创建了10个线程，全部执行task()函数，为解决资源竞争问题，使用mutex.acquire()函数实现资源锁定，第一个获取资源的线程锁定后，其他线程等待mutex.release()解锁。所以每次只有一个线程执行task()函数。
+# 使用互斥锁时，要避免死锁。在多任务系统下，当一个或多个线程等待系统资源，而资源又被线程本身或其他线程占用时，就形成了死锁。
+from threading import Thread, Lock
+import time
+
+n = 100     # 共100张票
+
+
+def task():
+    global n
+    mutex.acquire()     # 上锁
+    temp = n        # 赋值给临时变量
+    time.sleep(0.1)     # 休眠0.1秒
+    n = temp - 1        # 数量减少1
+    print("购买成功，剩余%d张电影票" % n)
+    mutex.release()     # 释放锁
+
+
+if __name__ == '__main__':
+    mutex = Lock()      # 实例化Lock类
+    t_l = []        # 初始化一个列表
+    for i in range(10):
+        t = Thread(target=task)     # 实例化线程类
+        t_l.append(t)       # 将线程实例存入列表中
+        t.start()       # 创建线程
+    for t in t_l:
+        t.join()        # 等待子线程结束
