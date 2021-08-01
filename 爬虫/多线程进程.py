@@ -220,12 +220,14 @@ if __name__ == '__main__':
     
     
     
-    # 使用Process子类创建进程
-    # 对于一些简单的小任务，通常使用Process(target=test)方式实现多进程。但是如果要处理复杂任务的进程，通常定义一个类，使其继承Process类，每次实例化一个类的时候，就等同于实例化一个进程对象。
-    # 使用Process子类创建多个进程
-    # 使用Process子类方式创建2个进程，分别输出父、子进程的PID，以及每个子进程的状态和运行时间。
-    
-    # -*- coding:utf-8 -*-
+# 使用Process子类创建进程
+# 对于一些简单的小任务，通常使用Process(target=test)方式实现多进程。但是如果要处理复杂任务的进程，通常定义一个类，使其继承Process类，每次实例化一个类的时候，就等同于实例化一个进程对象。
+# 使用Process子类创建多个进程
+# 使用Process子类方式创建2个进程，分别输出父、子进程的PID，以及每个子进程的状态和运行时间。
+# 定义了一个SubProcess子类，继承multiprocess.Process子类。SubProcess子类中定义了2个方法：__init__()初始化方法和run()方法。在__init__()初始化方法中，调用multiprocess.Process父类的__init__()
+# 初始化方法，否则父类初始化方法会被覆盖，无法开启进程。此外，在SubProcess子类中并没有定义start()方法，但在主进程中却调用了start()方法，此时就会自动执行SubProcess类的run()方法。
+  
+# -*- coding:utf-8 -*-
 
 from multiprocessing import Process
 import time
